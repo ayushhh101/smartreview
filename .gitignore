@@ -1,0 +1,7 @@
+data/*.jsonl
+data/*.jsonl.gz
+data/profile.json
+!data/sample_reviews.jsonl
+.venv/
+node_modules/
+__pycache__/

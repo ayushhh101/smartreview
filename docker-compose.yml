@@ -1,0 +1,17 @@
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+    volumes: ["mongo_data:/data/db"]
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    environment: { MONGO_URI: "mongodb://mongo:27017" }
+    ports: ["8000:8000"]
+    depends_on: [mongo]
+    volumes: ["./data:/app/data", "./models:/app/models"]
+  frontend:
+    build: { context: ./frontend }
+    ports: ["5173:5173"]
+    depends_on: [backend]
+volumes:
+  mongo_data:

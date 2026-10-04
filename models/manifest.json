@@ -1,0 +1,21 @@
+{
+  "best": "linear_svm",
+  "trained_at": "2026-10-04T17:02:24.964230+00:00",
+  "dataset_size": 99963,
+  "n_train": 80956,
+  "n_test": 19007,
+  "n_train_products": 30975,
+  "n_test_products": 7744,
+  "class_distribution": {
+    "negative": 13840,
+    "neutral": 6909,
+    "positive": 79214
+  },
+  "cv_folds": 5,
+  "tfidf_max_features": 30000,
+  "baseline": {
+    "strategy": "always predict the most common class",
+    "accuracy": 0.795,
+    "macro_f1": 0.2953
+  }
+}
