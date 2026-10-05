@@ -3,6 +3,8 @@ import Sidebar from './components/Sidebar.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Planned from './pages/Planned.jsx'
 import MLLab from './pages/MLLab.jsx'
+import Products from './pages/Products.jsx'
+import ProductDetail from './pages/ProductDetail.jsx'
 
 const P = (title, subject, phase, text) => (
   <Planned title={title} subject={subject} phase={phase}><p>{text}</p></Planned>
@@ -15,7 +17,8 @@ export default function App() {
       <main className="flex-1 min-w-0 p-8 max-w-[1400px]">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/products" element={P('Products', 'BDA + NLP', 4, 'Product health scores, aspect sentiment and trends.')} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/reviews" element={P('Reviews', 'NLP', 6, 'Browse and search reviews with TF-IDF cosine similarity.')} />
           <Route path="/nlp" element={P('NLP Explorer', 'NLP', 2, 'Tokens, lemmas, POS tags, n-grams and aspects for any review you paste.')} />
           <Route path="/ml" element={<MLLab />} />

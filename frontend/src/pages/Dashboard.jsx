@@ -1,6 +1,7 @@
 import { useApi } from '../lib/useApi.js'
 import { Stat, Loading, ErrorBlock, Empty, Card } from '../components/ui.jsx'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell, ComposedChart, Line } from 'recharts'
+import { pretty } from '../lib/format.js'
 
 const COLORS = { positive: '#0F766E', neutral: '#A16207', negative: '#B42318' }
 
@@ -40,6 +41,7 @@ python -m scripts.seed_database data/reviews_100000.jsonl --meta data/meta_Music
 }
 
 function Seeded({ d }) {
+  const summary = useApi('/analytics/summary')
   const pct = v => (v == null ? 'Pending NLP' : `${v}%`)
   const series = Object.entries(d.sentiment).map(([name, value]) => ({ name, value }))
   return (
@@ -64,6 +66,37 @@ function Seeded({ d }) {
           </div>
         </Card>
       )}
+      {summary.error?.code === 'not_computed' && (
+        <Empty title="Aspect and trend charts need analytics">
+          <pre className="bg-slate-50 rounded p-3 text-xs">python -m scripts.compute_analytics</pre>
+        </Empty>)}
+      {summary.data && <Analytics s={summary.data} />}
     </>
+  )
+}
+
+function Analytics({ s }) {
+  const aspects = s.aspects.map(a => ({ name: pretty(a.aspect), Positive: Math.round(100 * a.positive_ratio),
+    Negative: Math.round(100 * a.negative_ratio), Neutral: 100 - Math.round(100 * a.positive_ratio) - Math.round(100 * a.negative_ratio), mentions: a.mentions }))
+  const trend = s.trend.filter(t => t.n >= 50).map(t => ({ ...t, 'Positive %': Math.round(100 * t.positive_ratio) }))
+  return (
+    <div className="grid lg:grid-cols-2 gap-6">
+      <Card title="Aspect sentiment, all products" note="Share of positive / neutral / negative mentions per aspect, sorted by how often each is discussed">
+        <div className="h-80"><ResponsiveContainer>
+          <BarChart data={aspects} layout="vertical" margin={{ left: 40 }}>
+            <XAxis type="number" domain={[0, 100]} unit="%" /><YAxis type="category" dataKey="name" width={130} />
+            <Tooltip /><Legend />
+            <Bar dataKey="Positive" stackId="a" fill="#0F766E" /><Bar dataKey="Neutral" stackId="a" fill="#A16207" /><Bar dataKey="Negative" stackId="a" fill="#B42318" />
+          </BarChart></ResponsiveContainer></div>
+      </Card>
+      <Card title="Review volume and sentiment over time" note="By quarter (quarters with under 50 reviews hidden). Bars = reviews, line = % positive">
+        <div className="h-80"><ResponsiveContainer>
+          <ComposedChart data={trend}>
+            <XAxis dataKey="period" tick={{ fontSize: 10 }} interval="preserveStartEnd" /><YAxis yAxisId="n" /><YAxis yAxisId="p" orientation="right" domain={[0, 100]} />
+            <Tooltip /><Legend />
+            <Bar yAxisId="n" dataKey="n" name="Reviews" fill="#CBD5E1" /><Line yAxisId="p" dataKey="Positive %" stroke="#0F766E" strokeWidth={2} dot={false} />
+          </ComposedChart></ResponsiveContainer></div>
+      </Card>
+    </div>
   )
 }

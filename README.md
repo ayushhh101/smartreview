@@ -1,6 +1,6 @@
 # SmartReview — AI Product Review Intelligence Platform
 
-BDA + NLP + ML mini-project. Status: **Phase 3 of 7 complete** (real-data ingestion, NLP pipeline, ML training + ML Lab page). Dataset: Amazon Reviews 2023 - Musical Instruments (McAuley Lab, UCSD).
+BDA + NLP + ML mini-project. Status: **Phase 4 of 7 complete** (ingestion, NLP, ML Lab, product health scores, aspect sentiment, trends). Dataset: Amazon Reviews 2023 - Musical Instruments (McAuley Lab, UCSD).
 Plan: `docs/IMPLEMENTATION_PLAN.md` · Architecture: `docs/architecture.md` · Schema: `docs/database_schema.md`
 
 ## Run (without Docker)
@@ -42,9 +42,16 @@ Outputs: `models/` (best model + logistic regression), `model_results` collectio
 If products/users are empty after a seed that crashed on `--meta`, run
 `python -m scripts.seed_database --derived-only --meta data/meta_Musical_Instruments.jsonl`.
 
+## Phase 4: product analytics
+```bash
+python -m scripts.compute_analytics      # per-product aspects, trend, health score -> `analytics` collection
+```
+Run it again after seeding or after loading product names. Pages: Dashboard (aspect + trend charts), Products, Product detail.
+Health formula and trend rules are documented at the top of `analytics/health.py`.
+
 ## Tests
 ```bash
-python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py -q
+python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py backend/tests_phase4.py -q
 ```
 
 ## Phase 1 status
