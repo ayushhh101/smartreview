@@ -55,10 +55,16 @@ Every page has loading, empty and error states.
 1. Setup, backend skeleton, MongoDB connection, dashboard shell  (done)
 2. Real-data ingestion (Amazon 2023), profiling, NLP pipeline  (done)
 3. ML training, evaluation, model comparison  (done)
-4. Aspect sentiment, health score, trends
+4. Aspect sentiment, health score, trends  (done)
 5. BDA: MapReduce, NoSQL queries, streaming, Bloom, distinct count, benchmark
 6. Clustering, PCA, recommendations, search
 7. Academic mapping, report, viva, demo mode
+
+## 9b. NLP Lab pack (added after Phase 4)
+NLP Explorer page: step-by-step analysis of any text (`nlp/analysis.py`) and corpus insights (`nlp/corpus.py`,
+`scripts/compute_nlp_stats.py`): vocabulary reduction, Zipf's law, log-odds distinctive words, PMI collocations,
+NMF topics, LSA word vectors. Dictionary NER for brands, instruments and gear. Honest limits: lexicon-based aspects,
+LSA is not Word2Vec, topics are unlabeled.
 
 ## 10. Testing strategy
 - pytest for each pure module (tokenizer, aspect extractor, mapreduce vs naive equality, bloom no-false-negative).
@@ -68,4 +74,5 @@ Every page has loading, empty and error states.
 
 ## 11. Health score formula (fixed now, implemented in Phase 4)
 `Health = 100 * (0.40*aspect_mean_positive_ratio + 0.30*overall_positive_ratio + 0.30*(avg_rating-1)/4)`
-minus a capped penalty of up to 10 points for an emerging negative trend. Labelled "SmartReview Composite Health Score"; a heuristic, not a validated metric.
+minus a capped penalty of up to 10 points for an emerging negative trend.
+Implementation details (Phase 4): aspects with <3 mentions are ignored; if none qualify the aspect term is dropped and the other weights renormalised. "Emerging negative" = positive share in the latest 12 months is >=10 points below the previous 12 months, both windows have >=15 reviews, and a one-sided two-proportion z-test passes at 95%; penalty = min(10, 50 x drop). Windows are measured back from each product's own last review. Labelled "SmartReview Composite Health Score"; a heuristic, not a validated metric.

@@ -13,7 +13,6 @@ export default function MLLab() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">ML Lab</h1>
-        <div className="mt-2 flex gap-2"><Badge>ML</Badge><Badge>Phase 3</Badge></div>
       </div>
       {loading && <Loading label="Loading model results" />}
       {error && error.code === 'not_trained' && (

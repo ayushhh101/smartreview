@@ -28,3 +28,23 @@ ASPECTS = {
                          "seller", "customer", "exchange"},
 }
 TERM_TO_ASPECT = {t: a for a, terms in ASPECTS.items() for t in terms}
+
+
+# ---- gazetteers for dictionary-based named-entity recognition (domain NER) -------------------
+# Hand-built seed lists for the Musical Instruments domain. Dictionary NER only finds what is listed.
+BRANDS = {"fender", "gibson", "yamaha", "roland", "korg", "boss", "shure", "behringer", "ibanez", "epiphone",
+          "martin", "taylor", "casio", "alesis", "akai", "focusrite", "zoom", "tascam", "d'addario", "daddario",
+          "ernie ball", "planet waves", "snark", "kyser", "dunlop", "jim dunlop", "line 6", "electro-harmonix",
+          "vox", "marshall", "orange", "peavey", "squier", "takamine", "samson", "audio-technica", "sennheiser",
+          "novation", "arturia", "nord", "kawai", "pearl", "tama", "zildjian", "sabian", "remo", "evans", "vic firth",
+          "on-stage", "hercules", "singing machine", "seagull", "washburn", "schecter", "esp", "jackson", "ovation",
+          "elixir", "d'angelico", "mxr", "tc electronic", "digitech", "joyo", "donner", "fishman", "seymour duncan"}
+INSTRUMENTS = {"guitar", "guitars", "bass", "piano", "keyboard", "keyboards", "ukulele", "uke", "violin", "viola",
+               "cello", "drum", "drums", "cymbal", "cymbals", "flute", "saxophone", "sax", "trumpet", "clarinet",
+               "harmonica", "banjo", "mandolin", "trombone", "accordion", "synthesizer", "synth", "xylophone",
+               "recorder", "oboe", "tambourine", "cajon", "bongo", "bongos", "harp", "organ"}
+GEAR = {"amp", "amps", "amplifier", "pedal", "pedals", "tuner", "capo", "strap", "string", "strings", "pick", "picks",
+        "cable", "cables", "stand", "mic", "microphone", "mixer", "headphones", "headphone", "speaker", "speakers",
+        "case", "bag", "gig bag", "metronome", "reed", "reeds", "bow", "rosin", "mute", "footswitch", "controller",
+        "interface", "monitor", "monitors", "stylus", "sustain pedal", "music stand", "sheet music", "drumsticks",
+        "drumstick", "sticks", "bridge", "nut", "tailpiece"}

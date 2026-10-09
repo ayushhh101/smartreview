@@ -49,9 +49,17 @@ python -m scripts.compute_analytics      # per-product aspects, trend, health sc
 Run it again after seeding or after loading product names. Pages: Dashboard (aspect + trend charts), Products, Product detail.
 Health formula and trend rules are documented at the top of `analytics/health.py`.
 
+## NLP Lab pack: NLP Explorer
+```bash
+python -m scripts.compute_nlp_stats      # vocabulary, Zipf, distinctive words, collocations, topics, LSA word vectors (1-2 min)
+```
+Open **NLP Explorer** in the sidebar. Tab 1 runs every NLP step on any text (tokens, POS, 3 stemmers vs lemma, noun phrases,
+opinion pairs, entities, n-grams, TF-IDF, aspects, sentiment, plus the trained classifier). Tab 2 shows corpus-level results.
+Code: `nlp/analysis.py` (single text), `nlp/corpus.py` (corpus statistics), `backend/routes/nlp.py`.
+
 ## Tests
 ```bash
-python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py backend/tests_phase4.py -q
+python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py backend/tests_phase4.py backend/tests_phase5.py -q
 ```
 
 ## Phase 1 status

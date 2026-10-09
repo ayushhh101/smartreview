@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard.jsx'
 import Planned from './pages/Planned.jsx'
 import MLLab from './pages/MLLab.jsx'
 import Products from './pages/Products.jsx'
+import NLPExplorer from './pages/NLPExplorer.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
 
 const P = (title, subject, phase, text) => (
@@ -20,7 +21,7 @@ export default function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/reviews" element={P('Reviews', 'NLP', 6, 'Browse and search reviews with TF-IDF cosine similarity.')} />
-          <Route path="/nlp" element={P('NLP Explorer', 'NLP', 2, 'Tokens, lemmas, POS tags, n-grams and aspects for any review you paste.')} />
+          <Route path="/nlp" element={<NLPExplorer />} />
           <Route path="/ml" element={<MLLab />} />
           <Route path="/bda" element={P('BDA Lab', 'BDA', 5, 'Educational MapReduce simulation, Bloom filter and distinct counting.')} />
           <Route path="/streaming" element={P('Streaming', 'BDA', 5, 'Simulated live review stream with running counters.')} />

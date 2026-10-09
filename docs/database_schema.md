@@ -64,3 +64,10 @@ db.reviews.aggregate([
 | `rating` | `rating`, `sentiment` | label from stars: <=2 neg, 3 neu, >=4 pos (weak label) |
 | NLP | `sentiment_score` | VADER compound on text, -1..1; independent of the star label |
 `users.review_count / avg_rating` describe the loaded subset, not lifetime Amazon activity.
+
+## analytics documents (Phase 4, written by `scripts/compute_analytics.py`)
+| key | scope | data |
+|---|---|---|
+| `product_health` | product_id | n_reviews, avg_rating, positive_ratio, rating_histogram, aspects{mentions, positive/neutral/negative, positive_ratio}, weakest_aspect, trend{status, recent, prior, drop, z, series[]}, health{score, penalty, components}. Only products with >=5 reviews. |
+| `global_summary` | global | aspects[] (portfolio counts), trend[] (quarterly), total_reviews |
+| `nlp_corpus` | global | vocab stats, zipf{points, slope, r2}, distinctive_unigrams/bigrams per class, collocations, top_keywords, topics[], lsa info (written by `scripts/compute_nlp_stats.py`; word vectors saved to `models/lsa_words.joblib`) |

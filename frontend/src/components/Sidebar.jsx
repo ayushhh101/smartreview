@@ -5,7 +5,7 @@ export const NAV = [
   { to: '/reviews', label: 'Reviews' }, { to: '/nlp', label: 'NLP Explorer' },
   { to: '/ml', label: 'ML Lab' }, { to: '/bda', label: 'BDA Lab' },
   { to: '/streaming', label: 'Streaming' }, { to: '/recommendations', label: 'Recommendations' },
-  { to: '/ask', label: 'Ask SmartReview' }, { to: '/mapping', label: 'Academic Mapping' },
+  // { to: '/ask', label: 'Ask SmartReview' }, { to: '/mapping', label: 'Academic Mapping' },
   { to: '/about', label: 'About' },
 ]
 

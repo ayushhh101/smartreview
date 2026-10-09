@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from backend.database.mongo import DatabaseUnavailable
-from backend.routes import core, ml, products
+from backend.routes import core, ml, nlp, products
 
 app = FastAPI(title="SmartReview API", version="0.1.0",
               description="AI Product Review Intelligence Platform (BDA + NLP + ML mini-project)")
@@ -26,3 +26,4 @@ async def unhandled(_: Request, exc: Exception):
 app.include_router(core.router, prefix="/api")
 app.include_router(ml.router, prefix="/api")
 app.include_router(products.router, prefix="/api")
+app.include_router(nlp.router, prefix="/api")
