@@ -5,6 +5,8 @@ import Planned from './pages/Planned.jsx'
 import MLLab from './pages/MLLab.jsx'
 import Products from './pages/Products.jsx'
 import NLPExplorer from './pages/NLPExplorer.jsx'
+import BDALab from './pages/BDALab.jsx'
+import Streaming from './pages/Streaming.jsx'
 import ProductDetail from './pages/ProductDetail.jsx'
 
 const P = (title, subject, phase, text) => (
@@ -23,8 +25,8 @@ export default function App() {
           <Route path="/reviews" element={P('Reviews', 'NLP', 6, 'Browse and search reviews with TF-IDF cosine similarity.')} />
           <Route path="/nlp" element={<NLPExplorer />} />
           <Route path="/ml" element={<MLLab />} />
-          <Route path="/bda" element={P('BDA Lab', 'BDA', 5, 'Educational MapReduce simulation, Bloom filter and distinct counting.')} />
-          <Route path="/streaming" element={P('Streaming', 'BDA', 5, 'Simulated live review stream with running counters.')} />
+          <Route path="/bda" element={<BDALab />} />
+          <Route path="/streaming" element={<Streaming />} />
           <Route path="/recommendations" element={P('Recommendations', 'BDA', 6, 'Content-based similar-product recommendations.')} />
           <Route path="/ask" element={P('Ask SmartReview', 'NLP + BDA', 6, 'Questions answered from database statistics, no LLM.')} />
           <Route path="/mapping" element={P('Academic Mapping', 'All', 7, 'Concept, subject, where used, purpose.')} />

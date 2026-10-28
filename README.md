@@ -57,9 +57,17 @@ Open **NLP Explorer** in the sidebar. Tab 1 runs every NLP step on any text (tok
 opinion pairs, entities, n-grams, TF-IDF, aspects, sentiment, plus the trained classifier). Tab 2 shows corpus-level results.
 Code: `nlp/analysis.py` (single text), `nlp/corpus.py` (corpus statistics), `backend/routes/nlp.py`.
 
+## Phase 5: BDA Lab and Streaming
+```bash
+python -m scripts.run_benchmark          # naive loop vs MapReduce simulation vs MongoDB, 10k/50k/100k reviews (1-2 min)
+```
+Pages: **BDA Lab** (MapReduce simulator with a per-phase trace, Bloom filter, Flajolet-Martin distinct count, benchmark, MongoDB aggregation queries)
+and **Streaming** (simulated live stream: sliding window, reservoir sampling, negative-spike alert). The stream uses Server-Sent Events
+(`GET /api/bda/stream`) rather than WebSockets: one-way push needs no extra library. All BDA pages are labelled as educational simulations.
+
 ## Tests
 ```bash
-python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py backend/tests_phase4.py backend/tests_phase5.py -q
+python -m pytest backend/tests_phase1.py backend/tests_phase2.py backend/tests_phase3.py backend/tests_phase4.py backend/tests_phase5.py backend/tests_phase6.py -q
 ```
 
 ## Phase 1 status

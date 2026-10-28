@@ -51,7 +51,6 @@ function Seeded({ d }) {
         <Stat label="Products" value={d.products} />
         <Stat label="Positive" value={pct(d.positive_pct)} tone="text-pos" />
         <Stat label="Negative" value={pct(d.negative_pct)} tone="text-neg" />
-        <Stat label="Active streams" value="0" hint="Streaming arrives in Phase 5" />
         <Stat label="Top complaint" value={d.top_complaint || 'Pending NLP'} />
       </div>
       {series.length > 0 && (
